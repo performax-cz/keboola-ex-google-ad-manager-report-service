@@ -26,6 +26,7 @@ It uses `ReportService.ReportQuery` for downloading data.
   "#client_email": "KBC::ProjectSecure::eJwBYQGeE...iKz=",
   "token_uri": "https://oauth2.googleapis.com/token",
   "dimensions": [
+    "AD_EXCHANGE_DATE",
     "AD_EXCHANGE_DFP_AD_UNIT",
     "AD_EXCHANGE_DFP_AD_UNIT_ID",
     "AD_EXCHANGE_PRICING_RULE_NAME"
