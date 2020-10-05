@@ -1,0 +1,13 @@
+{
+    "parameters": {
+        "date_from": "2 days ago",
+        "date_to": "yesterday",
+        "network_code": 12345,
+        "timezone": "AD_EXCHANGE",
+        "#private_key": "*****",
+        "#client_email": "*****",
+        "token_uri": "*****",
+        "dimensions": [],
+        "metrics": []
+    }
+}
