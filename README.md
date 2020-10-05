@@ -72,6 +72,18 @@ For full list of allowed entries please see [official documentation](https://dev
 "dimensions": ["AD_EXCHANGE_PRICING_RULE_NAME"]
 ```
 
+## Run extractor in local environment
+
+If you want to test this extractor outside of Keboola, manually create `config/config.json` file (use template in `config/config.template.json`). Parameters prefixed by "#" are considered private.
+
+After creating config file simply run
+
+```
+docker-compose up
+```
+
+Downloaded data will be stored into `output/output.csv` file.
+
 
 ## DOC
 
