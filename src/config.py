@@ -4,23 +4,6 @@ import dateparser
 from keboola import docker
 
 
-MAX_RETRIES_DEFAULT = 5
-
-PRIVATE_KEY_FILE = "/tmp/data.json"
-
-DEFAULT_DIMENSIONS = [
-    'AD_EXCHANGE_DFP_AD_UNIT',
-    'AD_EXCHANGE_PRICING_RULE_NAME',
-]
-
-DEFAULT_METRICS = [
-    'AD_EXCHANGE_AD_REQUESTS',
-    'AD_EXCHANGE_MATCHED_REQUESTS',
-    'AD_EXCHANGE_ESTIMATED_REVENUE',
-    'AD_EXCHANGE_IMPRESSIONS',
-]
-
-
 class Config:
     @staticmethod
     def private_key_file(params, path):
@@ -33,7 +16,8 @@ class Config:
         return path
 
     @staticmethod
-    def load():
+    def load(default_max_retries: int, default_dimensions: list,
+             default_metrics: list):
         cfg = docker.Config('/data/')
         params = cfg.get_parameters()
         dimensions = params.get("dimensions")
@@ -42,14 +26,16 @@ class Config:
         if not dimensions:
             print("Dimensions are empty. Extractor will continue with"
                   " default values")
-            dimensions = DEFAULT_DIMENSIONS
+            dimensions = default_dimensions
         if not metrics:
             print("Metrics are empty. Extractor will continue with"
                   " default values")
-            metrics = DEFAULT_METRICS
+            metrics = default_metrics
 
         print("Dimensions: %s" % dimensions)
         print("Metrics: %s" % metrics)
+        params['metrics'] = metrics
+        params['dimensions'] = dimensions
 
         try:
             params['date_from'] = dateparser.parse(params['date_from']).date()
@@ -59,11 +45,9 @@ class Config:
                 "Date format is wrong. Find dateparser"
                 " library on pypi for more information."
             )
-        params['metrics'] = metrics
-        params['dimensions'] = dimensions
-        params['private_key_file'] = Config.private_key_file(
-            params, PRIVATE_KEY_FILE
-        )
+
+        key_file = "/tmp/private_key.json"
+        params['private_key_file'] = Config.private_key_file(params, key_file)
 
         allowed_timezones = ('PUBLISHER', 'PROPOSAL_LOCAL', 'AD_EXCHANGE')
         if params['timezone'] not in allowed_timezones:
@@ -72,6 +56,6 @@ class Config:
             )
 
         if 'max_retries' not in params:
-            params["max_retries"] = MAX_RETRIES_DEFAULT
+            params["max_retries"] = default_max_retries
 
         return params
