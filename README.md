@@ -3,7 +3,7 @@
 Extractor for downloading reports from [Google Ad Manager API](https://developers.google.com/ad-manager/api).
 It uses `ReportService.ReportQuery` for downloading data.
 
-[![](./gam.png)](https://developers.google.com/ad-manager/api/start) [![](./keboola.png)](https://www.keboola.com/)
+[![](images/gam.png)](https://developers.google.com/ad-manager/api/start) [![](images/keboola.png)](https://www.keboola.com/)
 
 ## :gear: Configuration
 
@@ -58,4 +58,4 @@ More details: https://developers.google.com/ad-manager/api/start
 
 In case of any problems with the extractor or additional requests, contact us on development@performax.cz
 
-[![](./px.png)](https://performax.cz/)
+[![](images/px.png)](https://performax.cz/)
