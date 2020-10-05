@@ -6,17 +6,15 @@ from googleads import ad_manager
 from googleads import errors
 from googleads.common import ZeepServiceProxy
 
+from extractor import Extractor
 
-class AdManagerReportQueryExtractor:
+
+class AdManagerReportQueryExtractor(Extractor):
     def __init__(self, date_from: datetime.date, date_to: datetime.date,
-                 application_name: str, network_code: int,
-                 extractor_version: str, timezone: str, private_key_file: str,
-                 api_version: str):
-        print(f"Extractor with version {extractor_version} is executed")
-
-        self.date_from = date_from
-        self.date_to = date_to
-        print("Selected interval: %s - %s" % (self.date_from, self.date_to))
+                 extractor_version: str, max_retries: int,
+                 application_name: str, network_code: int, timezone: str,
+                 private_key_file: str, api_version: str):
+        super().__init__(date_from, date_to, extractor_version, max_retries)
 
         self.timezone = timezone
         if timezone in ["PUBLISHER", "PROPOSAL_LOCAL"]:
@@ -36,18 +34,6 @@ class AdManagerReportQueryExtractor:
         client.cache = ZeepServiceProxy.NO_CACHE
         self.report_downloader = client.GetDataDownloader(version=api_version)
 
-    def date_range(self):
-        """
-        Iterator for date in date_range
-
-        Returns
-        -------
-        Single date inside date_range
-        """
-
-        for n in range(int((self.date_to - self.date_from).days) + 1):
-            yield self.date_from + datetime.timedelta(n)
-
     def run_report(self, report_job: dict):
         """
         Create report in API and wait for it
@@ -64,6 +50,7 @@ class AdManagerReportQueryExtractor:
             print('Failed to generate report. Error was: %s' % e)
             sys.exit()
 
+    @Extractor.retryable
     def download_report(self, report_job: dict):
         """
         Downloads report into tmp file

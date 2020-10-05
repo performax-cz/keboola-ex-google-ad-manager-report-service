@@ -25,10 +25,9 @@ More details: https://developers.google.com/ad-manager/api/start
 
 ## Development
 
-1. Set your own config file `config/config.json`
-2. Install Docker and Docker Compose and run it
+1. Set your own config file `config/config.json` (use template in `config/config.template.json`)
+2. Install Docker and Docker Compose and run it by `docker-compose up`
 3. Output CSV file is in `output` directory
-
 
 ## Prepared by Performax
 

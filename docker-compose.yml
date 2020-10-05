@@ -3,9 +3,6 @@ services:
   extractor:
     build:
       context: .
-      args:
-        PYPI_USER: ${PYPI_USER}
-        PYPI_PASSWORD: ${PYPI_PASSWORD}
     volumes:
       - ./src:/code/src
       - ./config/config.json:/data/config.json
