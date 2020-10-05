@@ -1,22 +1,20 @@
 from ad_manager_extractor import AdManagerReportQueryExtractor
 from config import Config
 
-OUTPUT_FILE = '/data/out/tables/output.csv'
-EXTRACTOR_VERSION = "__VERSION__"
-
 # Deprecation = May 2021
 # Sunset = August 2021
 API_VERSION = "v202008"
 APPLICATION_NAME = "performax.ex-ad-manager-report-service"
+OUTPUT_FILE = '/data/out/tables/output.csv'
+EXTRACTOR_VERSION = "__VERSION__"
 
-MAX_RETRIES_DEFAULT = 5
-
-DEFAULT_DIMENSIONS = [
+# default config values - can be overwritten in config/config.json
+CONFIG_DEFAULT_MAX_RETRIES = 5
+CONFIG_DEFAULT_DIMENSIONS = [
     'AD_EXCHANGE_DFP_AD_UNIT',
-    'AD_EXCHANGE_PRICING_RULE_NAME',
+    'AD_EXCHANGE_PRICING_RULE_NAME'
 ]
-
-DEFAULT_METRICS = [
+CONFIG_DEFAULT_METRICS = [
     'AD_EXCHANGE_AD_REQUESTS',
     'AD_EXCHANGE_MATCHED_REQUESTS',
     'AD_EXCHANGE_ESTIMATED_REVENUE',
@@ -27,9 +25,9 @@ DEFAULT_METRICS = [
 def main():
     print(f"Version of Ad Manager API: {API_VERSION}")
     params = Config.load(
-        default_max_retries=MAX_RETRIES_DEFAULT,
-        default_dimensions=DEFAULT_DIMENSIONS,
-        default_metrics=DEFAULT_METRICS
+        default_max_retries=CONFIG_DEFAULT_MAX_RETRIES,
+        default_dimensions=CONFIG_DEFAULT_DIMENSIONS,
+        default_metrics=CONFIG_DEFAULT_METRICS
     )
 
     extractor = AdManagerReportQueryExtractor(
