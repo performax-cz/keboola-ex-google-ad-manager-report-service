@@ -3,9 +3,9 @@
 Extractor for downloading reports from [Google Ad Manager API](https://developers.google.com/ad-manager/api).
 It uses `ReportService.ReportQuery` for downloading data.
 
-![](./gam.png)
+![](./gam.png)  ![](./keboola.png)
 
-## :information_source: Configuration
+## :gear: Configuration
 
 - **`date_from`** and **`date_to`** (required) - Period which the reporting information is gathered, e.g. `4 days ago`, `yeserday`, `August 14, 2020 EST` (it uses [dateparser](https://dateparser.readthedocs.io/en/latest))
 - **`network_code`** (required) - You'll find this in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/1234#home`, `1234` is your network code.
@@ -56,6 +56,6 @@ More details: https://developers.google.com/ad-manager/api/start
 
 ## :heart: Prepared by Performax
 
-In case of any problems with the extractor or additional requests, contact us on development@performax.cz.
+In case of any problems with the extractor or additional requests, contact us on development@performax.cz
 
 [![](./px.png)](https://performax.cz/)
