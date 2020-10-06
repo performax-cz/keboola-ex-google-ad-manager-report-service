@@ -1,4 +1,4 @@
-# Google Ad Manager Extractor for KBC
+# GAM Report Service Extractor for KBC
 
 Extractor for downloading reports from [Google Ad Manager API](https://developers.google.com/ad-manager/api).
 It uses `ReportService.ReportQuery` for downloading data.
