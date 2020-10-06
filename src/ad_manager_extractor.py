@@ -17,10 +17,6 @@ class AdManagerReportQueryExtractor(Extractor):
         super().__init__(date_from, date_to, extractor_version, max_retries)
 
         self.timezone = timezone
-        if timezone in ["PUBLISHER", "PROPOSAL_LOCAL"]:
-            self.report_column_date = "DATE"
-        elif timezone == "AD_EXCHANGE":
-            self.report_column_date = "AD_EXCHANGE_DATE"
 
         client = ad_manager.AdManagerClient.LoadFromString(yaml.dump({
             "ad_manager": {
@@ -86,7 +82,7 @@ class AdManagerReportQueryExtractor(Extractor):
         """
         report_job = {
             'reportQuery': {
-                'dimensions': dimensions + [self.report_column_date],
+                'dimensions': dimensions,
                 'columns': metrics,
                 'dateRangeType': 'CUSTOM_DATE',
                 'startDate': self.date_from,
