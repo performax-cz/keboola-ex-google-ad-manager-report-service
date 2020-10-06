@@ -34,5 +34,6 @@ jobs:
           export TAG=${GITHUB_REF#refs/tags/}  # cannot be placed in env section, because bash is not evaluated there
 
           sed -i "s/__VERSION__/$TAG/" src/main.py
+          docker build . --tag=$APP_IMAGE
           chmod +x ./deploy.sh
           ./deploy.sh
