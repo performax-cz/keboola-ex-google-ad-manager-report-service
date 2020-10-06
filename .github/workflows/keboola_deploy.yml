@@ -1,0 +1,27 @@
+name: Deploy to Keboola
+on:
+  push:
+    tags: [ v* ]
+
+jobs:
+  flake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Flake8
+        run: flake8 --show-source --statistics --count .
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a multi-line script
+        shell: bash
+        env:
+          KBC_DEVELOPERPORTAL_USERNAME: ${{ secrets.KBC_DEVELOPERPORTAL_USERNAME }}
+          KBC_DEVELOPERPORTAL_PASSWORD: ${{ secrets.KBC_DEVELOPERPORTAL_PASSWORD }}
+          KBC_DEVELOPERPORTAL_VENDOR: ${{ secrets.KBC_DEVELOPERPORTAL_VENDOR }}
+          KBC_DEVELOPERPORTAL_APP: ${{ secrets.KBC_DEVELOPERPORTAL_APP }}
+        run: |
+          export TAG=${GITHUB_REF#refs/tags/}  # cannot be placed in env section, because bash is not evaluated there
+          chmod +x ./deploy.sh
+          ./deploy.sh
