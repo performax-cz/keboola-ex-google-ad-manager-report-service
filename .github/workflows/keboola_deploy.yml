@@ -12,7 +12,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8
-          flake8 --show-source --statistics --count .
+          /home/runner/.local/bin/flake8 --show-source --statistics --count .
   deploy:
     runs-on: ubuntu-latest
     steps:
