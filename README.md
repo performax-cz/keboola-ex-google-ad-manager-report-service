@@ -7,13 +7,13 @@ It uses `ReportService.ReportQuery` for downloading data.
 
 ## :gear: Configuration
 
-- **`date_from`** and **`date_to`** (required) - Period which the reporting information is gathered, e.g. `4 days ago`, `yeserday`, `August 14, 2020 EST` (it uses [dateparser](https://dateparser.readthedocs.io/en/latest))
-- **`network_code`** (required) - You'll find this in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/1234#home`, `1234` is your network code.
-- **`timezone`** (required) - Determines the [time zone](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#timezonetype) used for the report's date range. It allows `AD_EXCHANGE`, `PUBLISHER` and `PROPOSAL_LOCAL`
-- **`dimensions`** (optional) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#dimensions) of break-down types being requested in the report. It defaults to `AD_EXCHANGE_DFP_AD_UNIT`, `AD_EXCHANGE_PRICING_RULE_NAME` and `DATE` (or `AD_EXCHANGE_DATE` if timezone is `AD_EXCHANGE`)
-- **`metrics`** (optional) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#columns) of trafficking statistics and revenue information being requested in the report. It defaults to `AD_EXCHANGE_AD_REQUESTS`, `AD_EXCHANGE_MATCHED_REQUESTS`, `AD_EXCHANGE_ESTIMATED_REVENUE` and `AD_EXCHANGE_IMPRESSIONS`
-- **`currency`** (optional) - The [currency](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#adxReportCurrency) for Ad Exchange revenue metrics. It defaults to `CZK
-- **`#private_key`**, **`#client_email`** and **`token_uri`** (required) - Credentials
+- **`date_from`** and **`date_to`** (REQUIRED) - Period which the reporting information is gathered, e.g. `4 days ago`, `yeserday`, `August 14, 2020 EST` (it uses [dateparser](https://dateparser.readthedocs.io/en/latest))
+- **`network_code`** (REQUIRED) - You'll find this in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/1234#home`, `1234` is your network code.
+- **`timezone`** (REQUIRED) - Determines the [time zone](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#timezonetype) used for the report's date range. It allows `AD_EXCHANGE`, `PUBLISHER` and `PROPOSAL_LOCAL`
+- **`#private_key`**, **`#client_email`** and **`token_uri`** (REQUIRED) - Credentials
+- **`dimensions`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#dimensions) of break-down types being requested in the report. It defaults to `AD_EXCHANGE_DFP_AD_UNIT`, `AD_EXCHANGE_PRICING_RULE_NAME` and `DATE` (or `AD_EXCHANGE_DATE` if timezone is `AD_EXCHANGE`)
+- **`metrics`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#columns) of trafficking statistics and revenue information being requested in the report. It defaults to `AD_EXCHANGE_AD_REQUESTS`, `AD_EXCHANGE_MATCHED_REQUESTS`, `AD_EXCHANGE_ESTIMATED_REVENUE` and `AD_EXCHANGE_IMPRESSIONS`
+- **`currency`** (OPTIONAL) - The [currency](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#adxReportCurrency) for Ad Exchange revenue metrics. It defaults to `CZK
 
 ## :bookmark: Sample configuration
 
