@@ -1,7 +1,6 @@
 # GAM Report Service Extractor for KBC
 
-Extractor for downloading reports from [Google Ad Manager API](https://developers.google.com/ad-manager/api).
-It uses `ReportService.ReportQuery` for downloading data.
+Extractor for downloading reports from [Google Ad Manager API](https://developers.google.com/ad-manager/api). It executes a ReportJob and retrieves performance and statistics about ad campaigns, networks, inventory and sales. It uses `ReportService.ReportQuery` endpoint.
 
 [![](images/gam.png)](https://developers.google.com/ad-manager/api/start) [![](images/keboola.png)](https://www.keboola.com/)
 
