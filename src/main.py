@@ -1,3 +1,5 @@
+import sys
+
 from extractor_gam import GoogleAdMangerExtractor
 from config import Config
 
@@ -12,13 +14,18 @@ EXTRACTOR_VERSION = "__VERSION__"
 
 def main():
     print("Run the GAM Report Service Extractor")
-    extractor = GoogleAdMangerExtractor(
-        application_name=APPLICATION_NAME,
-        extractor_version=EXTRACTOR_VERSION,
-        api_version=API_VERSION,
-        params=Config.load(),
-    )
-    extractor.download_report(OUTPUT_FILE)
+
+    try:
+        extractor = GoogleAdMangerExtractor(
+            application_name=APPLICATION_NAME,
+            extractor_version=EXTRACTOR_VERSION,
+            api_version=API_VERSION,
+            params=Config.load(),
+        )
+        extractor.download_report(OUTPUT_FILE)
+    except ValueError as e:
+        print(f"{e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

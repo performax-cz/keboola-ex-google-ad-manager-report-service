@@ -32,11 +32,18 @@ class Config:
         cfg = docker.Config('/data/')
         params = cfg.get_parameters()
 
+        # check required fields
+        required = ('timezone', 'date_from', 'date_to', "#private_key",
+                    "#client_email", "token_uri", "network_code")
+        for r in required:
+            if r not in params:
+                raise ValueError(f'Missing required field "{r}".')
+
         # validate timezone type
         allowed_timezones = ('PUBLISHER', 'PROPOSAL_LOCAL', 'AD_EXCHANGE')
         if params['timezone'] not in allowed_timezones:
             raise ValueError(
-                f"Invalid timezone. Choose from {allowed_timezones}"
+                f"Invalid timezone. Choose one from {allowed_timezones}"
             )
 
         # handle default dimensions
@@ -60,11 +67,17 @@ class Config:
         print(f"Selected metrics: {params['metrics']}")
 
         # parse date range
-        try:
-            params['date_from'] = dateparser.parse(params['date_from']).date()
-            params['date_to'] = dateparser.parse(params['date_to']).date()
-        except Exception:
-            raise ValueError("Invalid date format")
+        date_from = dateparser.parse(params['date_from'])
+        date_to = dateparser.parse(params['date_to'])
+
+        if not date_from:
+            raise ValueError(f"Invalid date format '{params['date_from']}'")
+
+        if not date_to:
+            raise ValueError(f"Invalid date format '{params['date_to']}'")
+
+        params['date_from'] = date_from.date()
+        params['date_to'] = date_to.date()
 
         # create file with private key
         key_file = "/tmp/private_key.json"
