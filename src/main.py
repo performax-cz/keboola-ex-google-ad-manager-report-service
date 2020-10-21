@@ -1,5 +1,4 @@
 import sys
-
 from extractor_gam import GoogleAdMangerExtractor
 from config import Config
 
