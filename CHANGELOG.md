@@ -1,9 +1,9 @@
 # AdManagerExtractor changelog
 
-## v0.0.13 (2020-09-08)
+## v0.0.2
 
-- PX-1044 uprava default hodnot
+- added config validation and better error handling
 
-## v0.0.12 (2020-09-08)
+## v0.0.1 (2020-09-08)
 
-- PX-1044 pridat dimenze a metriky do configu
+- first public release
