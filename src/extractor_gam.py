@@ -98,7 +98,9 @@ class GoogleAdMangerExtractor(BaseExtractor):
         )
 
         report_file.close()
-        print(f"[INFO]: Report downloaded to temporary file {report_file.name}")
+        print(
+            f"[INFO]: Report downloaded to temporary file {report_file.name}"
+        )
 
         self.write_to_file(report_file.name, path)
 

@@ -1,6 +1,4 @@
 import json
-from json.decoder import JSONDecodeError
-
 import dateparser
 from keboola import docker
 
