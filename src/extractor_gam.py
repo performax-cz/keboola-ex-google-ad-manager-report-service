@@ -56,7 +56,7 @@ class GoogleAdMangerExtractor(BaseExtractor):
             print('[INFO]: Failed to generate report. Error: %s' % e)
             sys.exit()
 
-    # @BaseExtractor.retryable
+    @BaseExtractor.retryable
     def download_report(self, path: str):
         """Download the report to file"""
 
