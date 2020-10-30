@@ -15,7 +15,7 @@ Extractor for downloading reports from [Google Ad Manager API](https://developer
 - **`dimension_attributes`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202002/ReportService.ReportQuery#dimensionattributes) of dimension attributes. Please note, that some dimension attributes can be used only with certain dimension. For more information please see the official documentation. `dimension_attributes` are not used by default 
 - **`metrics`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#columns) of trafficking statistics and revenue information being requested in the report. It defaults to `AD_EXCHANGE_AD_REQUESTS`, `AD_EXCHANGE_MATCHED_REQUESTS`, `AD_EXCHANGE_ESTIMATED_REVENUE` and `AD_EXCHANGE_IMPRESSIONS`
 - **`currency`** (OPTIONAL) - The [currency](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#adxReportCurrency) for Ad Exchange revenue metrics. It defaults to `CZK
-- **`adUnitView`** (OPTIONAL) - The [adUnitView](https://developers.google.com/ad-manager/api/reference/v202002/ReportService.ReportQuery#adunitview) used for report
+- **`ad_unit_view`** (OPTIONAL) - The [adUnitView](https://developers.google.com/ad-manager/api/reference/v202002/ReportService.ReportQuery#adunitview) used for report
 
 ## :bookmark: Sample configuration
 
