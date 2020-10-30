@@ -43,37 +43,7 @@ Extractor for downloading reports from [Google Ad Manager API](https://developer
 }
 ```
 
-## :bookmark: Sample configuration (using `dimensionAttributes`)
-
-```json
-{
-  "date_from": "80 days ago",
-  "date_to": "yesterday",
-  "network_code": "68713940014",
-  "timezone": "AD_EXCHANGE",
-  "#private_key": "KBC::ProjectSecure::eJwB1Qcq...OVNcF",
-  "#client_email": "KBC::ProjectSecure::eJwBYQGeE...iKz=",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "metrics": [
-      "AD_SERVER_IMPRESSIONS",
-      "AD_SERVER_CLICKS",
-      "AD_SERVER_CTR",
-      "AD_SERVER_CPM_AND_CPC_REVENUE",
-      "AD_SERVER_WITHOUT_CPD_AVERAGE_ECPM"
-    ],
-    "dimensions": [
-      "ORDER_ID",
-      "ORDER_NAME"
-    ],
-    "dimension_attributes": [
-      "ORDER_TRAFFICKER",
-      "ORDER_START_DATE_TIME",
-      "ORDER_END_DATE_TIME"
-    ]
-}
-```
-
-Please note, that in both cases you must replace `#private_key` and `#client_email` with your real credentials.
+Please note, that you must replace `#private_key` and `#client_email` with your real credentials.
 
 ## :unlock: How to get credentials and enable API access
 
