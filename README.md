@@ -9,10 +9,13 @@ Extractor for downloading reports from [Google Ad Manager API](https://developer
 - **`date_from`** and **`date_to`** (REQUIRED) - Period which the reporting information is gathered, e.g. `4 days ago`, `yeserday`, `August 14, 2020 EST` (it uses [dateparser](https://dateparser.readthedocs.io/en/latest))
 - **`network_code`** (REQUIRED) - You'll find this in the URL when you are logged into your network. For example, in the URL `https://admanager.google.com/1234#home`, `1234` is your network code.
 - **`timezone`** (REQUIRED) - Determines the [time zone](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#timezonetype) used for the report's date range. It allows `AD_EXCHANGE`, `PUBLISHER` and `PROPOSAL_LOCAL`
-- **`#private_key`**, **`#client_email`** and **`token_uri`** (REQUIRED) - Credentials
+- **`#private_key`** (REQUIRED) - Credentials - private key in plain text (will be encrypted by Keboola). Key must be written in one row, each new line must be delimited by `\n` character
+- **`#client_email`** and **`token_uri`** (REQUIRED) - Credentials
 - **`dimensions`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#dimensions) of break-down types being requested in the report. It defaults to `AD_EXCHANGE_DFP_AD_UNIT`, `AD_EXCHANGE_PRICING_RULE_NAME` and `DATE` (or `AD_EXCHANGE_DATE` if timezone is `AD_EXCHANGE`)
+- **`dimension_attributes`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202002/ReportService.ReportQuery#dimensionattributes) of dimension attributes. Please note, that some dimension attributes can be used only with certain dimension. For more information please see the official documentation. `dimension_attributes` are not used by default 
 - **`metrics`** (OPTIONAL) - The [list](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#columns) of trafficking statistics and revenue information being requested in the report. It defaults to `AD_EXCHANGE_AD_REQUESTS`, `AD_EXCHANGE_MATCHED_REQUESTS`, `AD_EXCHANGE_ESTIMATED_REVENUE` and `AD_EXCHANGE_IMPRESSIONS`
 - **`currency`** (OPTIONAL) - The [currency](https://developers.google.com/ad-manager/api/reference/v202008/ReportService.ReportQuery#adxReportCurrency) for Ad Exchange revenue metrics. It defaults to `CZK
+- **`ad_unit_view`** (OPTIONAL) - The [adUnitView](https://developers.google.com/ad-manager/api/reference/v202002/ReportService.ReportQuery#adunitview) used for report
 
 ## :bookmark: Sample configuration
 
@@ -40,7 +43,7 @@ Extractor for downloading reports from [Google Ad Manager API](https://developer
 }
 ```
 
-
+Please note, that you must replace `#private_key` and `#client_email` with your real credentials.
 
 ## :unlock: How to get credentials and enable API access
 
@@ -57,6 +60,6 @@ More details: https://developers.google.com/ad-manager/api/start
 
 ## :heart: Prepared by Performax
 
-In case of any problems with the extractor or additional requests, contact us on development@performax.cz
+In case of any problems with the extractor or additional requests, contact us on [development@performax.cz](mailto:development@performax.cz)
 
 [![](images/px.png)](https://performax.cz/)

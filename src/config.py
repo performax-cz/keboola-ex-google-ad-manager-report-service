@@ -48,7 +48,7 @@ class Config:
 
         # handle default dimensions
         if "dimensions" not in params:
-            print("Dimensions field is empty -> use default")
+            print("[INFO]: Dimensions field is empty -> use default")
             params['dimensions'] = DEFAULT_DIMENSIONS
 
             # add date column to dimensions - depends on timezone type
@@ -57,14 +57,14 @@ class Config:
             elif params["timezone"] == "AD_EXCHANGE":
                 params['dimensions'].append("AD_EXCHANGE_DATE")
 
-        print(f"Selected dimensions: {params['dimensions']}")
+        print(f"[INFO]: Selected dimensions: {params['dimensions']}")
 
         # handle default metrics
         if "metrics" not in params:
-            print("Metrics field is empty -> use default")
+            print("[INFO]:Metrics field is empty -> use default")
             params['metrics'] = DEFAULT_METRICS
 
-        print(f"Selected metrics: {params['metrics']}")
+        print(f"[INFO]: Selected metrics: {params['metrics']}")
 
         # parse date range
         date_from = dateparser.parse(params['date_from'])
@@ -87,7 +87,18 @@ class Config:
         if 'max_retries' not in params:
             params["max_retries"] = DEFAULT_MAX_RETRIES
 
+        if 'dimension_attributes' in params:
+            print(
+                "[INFO]: Selected dimension attributes:"
+                f" {params['dimension_attributes']}"
+            )
+
         if 'currency' not in params:
-            params["currency"] = "CZK"
+            for metric in params['metrics']:
+                if metric.startswith("AD_EXCHANGE"):
+                    print("[INFO]: Currency is not set, but AD_EXCHANGE metric"
+                          " is present. Using CZK as default currency")
+                    params['currency'] = "CZK"
+                    break
 
         return params
