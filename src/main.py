@@ -1,4 +1,5 @@
 import sys
+from json.decoder import JSONDecodeError
 from extractor_gam import GoogleAdMangerExtractor
 from config import Config
 
@@ -12,7 +13,7 @@ EXTRACTOR_VERSION = "__VERSION__"
 
 
 def main():
-    print("Run the GAM Report Service Extractor")
+    print("[INFO]: Run the GAM Report Service Extractor")
 
     try:
         extractor = GoogleAdMangerExtractor(
@@ -22,8 +23,12 @@ def main():
             params=Config.load(),
         )
         extractor.download_report(OUTPUT_FILE)
-    except ValueError as e:
-        print(f"{e}")
+        print("[SUCCESS] Extractor is done")
+    except JSONDecodeError as e:
+        print(f"[ERROR]: Check your JSON format: {e}")
+        sys.exit(1)
+    except (Exception, ValueError) as e:
+        print(f"[ERROR]: {type(e)} {e}")
         sys.exit(1)
 
 

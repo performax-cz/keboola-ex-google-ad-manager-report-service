@@ -9,8 +9,8 @@ class BaseExtractor:
         self.date_from = date_from
         self.date_to = date_to
         self.max_retries = max_retries
-        print(f"Extractor {extractor_version} is executed")
-        print(f"Selected interval: {self.date_from} - {self.date_to}")
+        print(f"[INFO]: Extractor {extractor_version} is executed")
+        print(f"[INFO]: Selected interval: {self.date_from} - {self.date_to}")
 
     def date_range(self):
         """Iterator for date in date range"""

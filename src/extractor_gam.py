@@ -22,17 +22,25 @@ class GoogleAdMangerExtractor(BaseExtractor):
         self.timezone = params["timezone"]
         self.dimensions = params["dimensions"]
         self.metrics = params["metrics"]
-        self.currency = params["currency"]
+        self.currency = params.get("currency")
+        self.dimension_attributes = params.get("dimension_attributes")
+        self.ad_unit_view = params.get("ad_unit_view")
 
-        print(f"Version of Google Ad Manager API: {api_version}")
+        print(f"[INFO]: Version of Google Ad Manager API: {api_version}")
 
-        client = ad_manager.AdManagerClient.LoadFromString(yaml.dump({
-            "ad_manager": {
-                "application_name": application_name,
-                "network_code": params["network_code"],
-                "path_to_private_key_file": params["private_key_file"]
-            }
-        }))
+        try:
+            client = ad_manager.AdManagerClient.LoadFromString(yaml.dump({
+                "ad_manager": {
+                    "application_name": application_name,
+                    "network_code": params["network_code"],
+                    "path_to_private_key_file": params["private_key_file"]
+                }
+            }))
+        except ValueError as e:
+            raise ValueError(
+                f"{e} Please, check format of your private key. New lines"
+                f" must be delimited by \\n character."
+            )
 
         # disable caching
         client.cache = ZeepServiceProxy.NO_CACHE
@@ -45,10 +53,10 @@ class GoogleAdMangerExtractor(BaseExtractor):
             report_job_id = self.report_downloader.WaitForReport(report_job)
             return report_job_id
         except errors.AdManagerReportError as e:
-            print('Failed to generate report. Error: %s' % e)
+            print('[INFO]: Failed to generate report. Error: %s' % e)
             sys.exit()
 
-    @BaseExtractor.retryable
+    # @BaseExtractor.retryable
     def download_report(self, path: str):
         """Download the report to file"""
 
@@ -56,22 +64,32 @@ class GoogleAdMangerExtractor(BaseExtractor):
             mode='w+b', suffix='.csv', delete=False
         )
 
-        report_job = {
-            'reportQuery': {
+        report_query = {
                 'dimensions': self.dimensions,
                 'columns': self.metrics,
                 'dateRangeType': 'CUSTOM_DATE',
                 'startDate': self.date_from,
                 'endDate': self.date_to,
-                'timeZoneType': self.timezone,
-                'adxReportCurrency': self.currency,
+                'timeZoneType': self.timezone
             }
+
+        if self.dimension_attributes:
+            report_query['dimensionAttributes'] = self.dimension_attributes
+
+        if self.ad_unit_view:
+            report_query['adUnitView'] = self.ad_unit_view
+
+        if self.currency:
+            report_query['adxReportCurrency'] = self.currency
+
+        report_job = {
+            'reportQuery': report_query
         }
 
-        print("Create the report")
+        print("[INFO]: Create the report")
         report_job_id = self.create_report(report_job)
 
-        print("Download the report")
+        print("[INFO]: Download the report")
         self.report_downloader.DownloadReportToFile(
             report_job_id=report_job_id,
             export_format='CSV_DUMP',
@@ -80,14 +98,14 @@ class GoogleAdMangerExtractor(BaseExtractor):
         )
 
         report_file.close()
-        print(f"Report downloaded to temporary file {report_file.name}")
+        print(f"[INFO]: Report downloaded to temporary file {report_file.name}")
 
         self.write_to_file(report_file.name, path)
 
     @staticmethod
     def write_to_file(original_path, new_path):
         """Write binary data from temporary file to output file"""
-        print(f"Transform data from binary to text file {new_path}")
+        print(f"[INFO]: Transform data from binary to text file {new_path}")
         with open(new_path, mode='wt', encoding='utf-8') as new_file:
             with open(original_path, mode='rb') as original_file:
                 for line in original_file:
