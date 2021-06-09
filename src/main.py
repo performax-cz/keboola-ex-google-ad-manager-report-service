@@ -3,8 +3,6 @@ from json.decoder import JSONDecodeError
 from extractor_gam import GoogleAdMangerExtractor
 from config import Config
 
-# Deprecation = May 2021
-# Sunset = August 2021
 API_VERSION = "v202105"
 
 APPLICATION_NAME = "performax.ex-google-ad-manager-report-service"
