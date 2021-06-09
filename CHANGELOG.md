@@ -1,5 +1,9 @@
 # AdManagerExtractor changelog
 
+## v0.0.4
+
+- updated GAM API version to v202105
+
 ## v0.0.3
 
 - added support for `dimensionAttributes` and `adUnitView`
