@@ -3,7 +3,7 @@ from json.decoder import JSONDecodeError
 from extractor_gam import GoogleAdMangerExtractor
 from config import Config
 
-API_VERSION = "v202105"
+API_VERSION = "v202205"
 
 APPLICATION_NAME = "performax.ex-google-ad-manager-report-service"
 OUTPUT_FILE = '/data/out/tables/output.csv'
