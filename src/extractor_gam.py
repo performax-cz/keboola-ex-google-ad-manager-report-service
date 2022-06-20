@@ -70,7 +70,7 @@ class GoogleAdMangerExtractor(BaseExtractor):
                 'dateRangeType': 'CUSTOM_DATE',
                 'startDate': self.date_from,
                 'endDate': self.date_to,
-                'timeZoneType': self.timezone
+                # 'timeZoneType': self.timezone
             }
 
         if self.dimension_attributes:
