@@ -1,5 +1,9 @@
 # AdManagerExtractor changelog
 
+## v0.0.5 (2022-06-20)
+
+- aktualizace GAM API na verzi v202205
+
 ## v0.0.4 (2021-06-09)
 
 - updated GAM API version to v202105
